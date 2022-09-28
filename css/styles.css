@@ -1,0 +1,62 @@
+body {
+  font-family: Roboto, sans-serif;
+}
+
+/* NAV */
+
+.color-block-bg {
+  background-color: #e0a4cc;
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.nav-header {
+  margin: 0;
+  font-family: "Proza Libre", serif;
+  font-size: 1.6rem;
+  color: white;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  text-align: right;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links li {
+  display: inline;
+  margin: 0 13px;
+  font-size: 0.938rem;
+}
+
+/* MAIN */
+
+.clow-card {
+  margin-bottom: 1rem;
+  border: 1px solid rgb(199 199 199);
+  border-radius: 0.25rem;
+  box-shadow: 0 6px 6px -4px rgb(0 0 0 / 30%);
+  padding: 13px 13px 0;
+}
+
+.clow-card-wrapper {
+  margin: 30px auto;
+}
+
+.clow-card img {
+  width: 100%;
+}
+
+.clow-card-text {
+  text-align: center;
+}
+
+.clow-card-text .fa-heart {
+  margin: 0 4px;
+}

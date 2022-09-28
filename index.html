@@ -4,15 +4,48 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AJAX Project</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;700&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/c9c5205463.js" crossorigin="anonymous"></script>
   <link rel="icon" href="images/favicon.ico">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header>
-  </header>
+  <nav>
+    <div class="color-block-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-full">
+            <h3 class="nav-header">Clowpedia</h3>
+          </div>
+          <div class="col-full">
+            <ul class="nav-links">
+              <li><a href="#">About</a></li>
+              <li><a href="#">Favorite Cards</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
   <main>
+    <div data-view="cards-view">
+      <div class="container">
+        <div class="clow-card-wrapper row">
+          <div class="col-fifth">
+            <div class="clow-card">
+              <img src="images/ClowJump.jpg">
+              <div class="clow-card-text">
+                <p><i class="fa-regular fa-heart"></i> The Jump</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
