@@ -38,6 +38,7 @@ body {
 /* MAIN */
 
 .clow-card {
+  margin: auto 1rem;
   margin-bottom: 1rem;
   border: 1px solid rgb(199 199 199);
   border-radius: 0.25rem;
