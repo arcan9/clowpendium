@@ -6,7 +6,7 @@ var $cardWrapper = document.querySelector('.clow-card-wrapper');
 DOM TREE
 
 <div class="col-fifth">
-      <div class="clow-card">
+      <div class="clow-card" data-card-num="">
         <img src="images/ClowJump.jpg">
         <div class="clow-card-text">
           <p><i class="fa-regular fa-heart"></i> The Jump</p>
@@ -27,6 +27,7 @@ function getCards(pageSize) {
 
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');
+      $clowCard.setAttribute('data-card-num', xhr.response.data[i].cardNumber);
 
       var $cardImg = document.createElement('img');
       $cardImg.setAttribute('src', xhr.response.data[i].clowCard);
@@ -52,3 +53,7 @@ function getCards(pageSize) {
 }
 
 getCards(55);
+
+// click on an individual card
+// display a modal with card info. Create DOM tree for it.
+// when card is clicked, api data is rendered and appended to modal
