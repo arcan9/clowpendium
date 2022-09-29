@@ -7,9 +7,9 @@ DOM TREE
 
 <div class="col-fifth">
       <div class="clow-card" data-card-num="">
-        <img src="images/ClowJump.jpg">
+        <img src="images/ClowJump.jpg" class="clow-card-img">
         <div class="clow-card-text">
-          <p><i class="fa-regular fa-heart"></i> The Jump</p>
+          <p><i class="fa-regular fa-heart"></i> <span class="card-title">The Jump</span></p>
         </div>
       </div>
 </div>
@@ -31,6 +31,7 @@ function getCards(pageSize) {
 
       var $cardImg = document.createElement('img');
       $cardImg.setAttribute('src', xhr.response.data[i].clowCard);
+      $cardImg.setAttribute('class', 'clow-card-img');
 
       var $clowCardText = document.createElement('div');
       $clowCardText.setAttribute('class', 'clow-card-text');
@@ -39,12 +40,16 @@ function getCards(pageSize) {
       var $heartIcon = document.createElement('i');
       $heartIcon.setAttribute('class', 'fa-regular fa-heart');
 
+      var $cardTitle = document.createElement('span');
+      $cardTitle.setAttribute('class', 'card-title');
+
       var $nameTextNode = document.createTextNode(xhr.response.data[i].englishName);
 
       $colFifth.appendChild($clowCard);
       $clowCard.append($cardImg, $clowCardText);
       $clowCardText.appendChild($cardName);
-      $cardName.append($heartIcon, $nameTextNode);
+      $cardName.append($heartIcon, $cardTitle);
+      $cardTitle.appendChild($nameTextNode);
 
       $cardWrapper.appendChild($colFifth);
     }
@@ -56,4 +61,4 @@ getCards(55);
 
 // click on an individual card
 // display a modal with card info. Create DOM tree for it.
-// when card is clicked, api data is rendered and appended to modal
+// when card is clicked, card data whose number matches the clicked element is rendered and appended to modal
