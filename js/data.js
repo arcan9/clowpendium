@@ -20,7 +20,7 @@ function getCards(pageSize) {
   xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card?pageSize=' + pageSize);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-
+    // console.log(xhr.response);
     for (var i = 0; i < xhr.response.data.length; i++) {
       var $colFifth = document.createElement('div');
       $colFifth.setAttribute('class', 'col-fifth');
@@ -28,6 +28,7 @@ function getCards(pageSize) {
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');
       $clowCard.setAttribute('data-card-num', xhr.response.data[i].cardNumber);
+      $clowCard.setAttribute('data-id', xhr.response.data[i]._id);
 
       var $cardImg = document.createElement('img');
       $cardImg.setAttribute('src', xhr.response.data[i].clowCard);
@@ -58,7 +59,3 @@ function getCards(pageSize) {
 }
 
 getCards(55);
-
-// click on an individual card
-// display a modal with card info. Create DOM tree for it.
-// when card is clicked, card data whose number matches the clicked element is rendered and appended to modal
