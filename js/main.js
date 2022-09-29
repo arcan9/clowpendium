@@ -7,17 +7,23 @@ $cardWrapper.addEventListener('click', handleClick);
 window.addEventListener('click', handleClickOff);
 
 function handleClick(event) {
-  // event.preventDefault();
-
-  if (event.target.tagName === 'I') {
+  if (event.target.tagName !== 'IMG') {
     return;
   }
 
   $overlay.className = 'overlay';
   $cardModalContainer.className = 'card-modal-container';
 
-  renderCard('6039396a68347a4a842920cf');
+  var $allClowCards = Array.from(document.querySelectorAll('.clow-card-img'));
+  var targetId = event.target.getAttribute('data-id');
 
+  for (var i = 0; i < $allClowCards.length; i++) {
+    var id = $allClowCards[i].getAttribute('data-id');
+
+    if (id === targetId) {
+      renderCard(targetId);
+    }
+  }
 }
 
 function handleClickOff(event) {
@@ -28,7 +34,7 @@ function handleClickOff(event) {
   $overlay.className = 'overlay hidden';
   $cardModalContainer.className = 'card-modal-container hidden';
 
-  // As long as modal div has chidren, remove them all
+  // As long as modal div has children, remove them all
   while ($modalRow.firstChild) {
     $modalRow.removeChild($modalRow.firstChild);
   }
@@ -70,7 +76,7 @@ function renderCard(id) {
     var $heartIcon = document.createElement('i');
     $heartIcon.setAttribute('class', 'fa-regular fa-heart');
 
-    var $nameTextNode = document.createTextNode(xhr.response.englishName);
+    var $nameTextNode = document.createTextNode(' ' + xhr.response.englishName);
     var $kanjiTextNode = document.createTextNode(xhr.response.kanji);
     var $numberTextnode = document.createTextNode(xhr.response.cardNumber);
 
@@ -86,8 +92,8 @@ function renderCard(id) {
     $span2.setAttribute('class', 'text-gray');
     $span3.setAttribute('class', 'text-gray');
 
-    $span1.textContent = 'Kanji';
-    $span2.textContent = 'Card Number#';
+    $span1.textContent = 'Kanji ';
+    $span2.textContent = 'Card Number# ';
     $span3.textContent = 'Description';
 
     $colHalf.appendChild($colImg);

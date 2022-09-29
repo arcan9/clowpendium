@@ -28,11 +28,11 @@ function getCards(pageSize) {
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');
       $clowCard.setAttribute('data-card-num', xhr.response.data[i].cardNumber);
-      $clowCard.setAttribute('data-id', xhr.response.data[i]._id);
 
       var $cardImg = document.createElement('img');
       $cardImg.setAttribute('src', xhr.response.data[i].clowCard);
       $cardImg.setAttribute('class', 'clow-card-img');
+      $cardImg.setAttribute('data-id', xhr.response.data[i]._id);
 
       var $clowCardText = document.createElement('div');
       $clowCardText.setAttribute('class', 'clow-card-text');

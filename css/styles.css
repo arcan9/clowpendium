@@ -93,7 +93,7 @@ img {
   background-color: white;
 }
 
-.clow-card:hover {
+.clow-card img:hover {
   cursor: pointer;
 }
 
