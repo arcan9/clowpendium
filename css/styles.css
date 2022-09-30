@@ -1,0 +1,121 @@
+body {
+  font-family: Roboto, sans-serif;
+  background-color: #fff;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.11'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  color: rgb(59, 48, 29);
+
+  /* overflow-x: hidden; */
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+img {
+  width: 100%;
+}
+
+input {
+  height: 30px;
+  width: 200px;
+  border: 2px solid pink;
+  border-radius: 4px;
+  padding: 0.75rem 0.25rem;
+}
+
+input:focus {
+  outline: none;
+  border: 2px solid rgb(194, 128, 172);
+}
+
+.text-gray {
+  color: rgb(172, 169, 170);
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0 0 0 / 80%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+}
+
+/* NAV */
+
+.color-block-bg {
+  background: rgb(194, 128, 172);
+  background: linear-gradient(295deg, rgba(194, 128, 172, 1) 28%, rgba(142, 117, 185, 1) 89%);
+  margin: 0;
+  padding: 0.75rem;
+}
+
+.nav-header {
+  margin: 0;
+  font-family: "Proza Libre", serif;
+  font-size: 1.6rem;
+  color: white;
+  letter-spacing: 2px;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  text-align: right;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: white;
+}
+
+.nav-links a:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.nav-links li {
+  display: inline;
+  margin: 0 13px;
+  font-size: 0.938rem;
+}
+
+/* MAIN */
+
+.clow-card {
+  margin: auto 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid rgb(199 199 199);
+  border-radius: 0.25rem;
+  box-shadow: 0 6px 6px -4px rgb(0 0 0 / 30%);
+  padding: 13px 13px 0;
+  background-color: white;
+}
+
+.clow-card img:hover {
+  cursor: pointer;
+}
+
+.clow-card-wrapper {
+  margin: 30px auto;
+}
+
+.clow-card-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1vw;
+}
+
+.clow-card-text .fa-heart {
+  margin: 0 4px;
+}
+
+.card-title {
+  font-family: "Proza Libre", serif;
+}
