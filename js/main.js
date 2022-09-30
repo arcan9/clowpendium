@@ -41,7 +41,7 @@ function handleClickOff(event) {
 }
 
 /*
-DOM TREE
+MODAL DOM TREE
 
 <div class="col-half">
   <img src="images/ClowJump.jpg" alt="">

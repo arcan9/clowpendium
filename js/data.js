@@ -5,13 +5,13 @@ var $cardWrapper = document.querySelector('.clow-card-wrapper');
 /*
 DOM TREE
 
-<div class="col-fifth">
-      <div class="clow-card" data-card-num="">
-        <img src="images/ClowJump.jpg" class="clow-card-img">
-        <div class="clow-card-text">
-          <p><i class="fa-regular fa-heart"></i> <span class="card-title">The Jump</span></p>
-        </div>
-      </div>
+<div class="col-fifth col-fourth col-third">
+  <div class="clow-card" data-card-num="">
+    <img src="images/ClowJump.jpg" class="clow-card-img" data-id="603a6076e708590015ca94d1">
+    <div class="clow-card-text">
+      <p><i class="fa-regular fa-heart"></i> <span class="card-title">The Jump</span></p>
+    </div>
+  </div>
 </div>
 */
 
@@ -20,10 +20,9 @@ function getCards(pageSize) {
   xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card?pageSize=' + pageSize);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // console.log(xhr.response);
     for (var i = 0; i < xhr.response.data.length; i++) {
       var $colFifth = document.createElement('div');
-      $colFifth.setAttribute('class', 'col-fifth');
+      $colFifth.setAttribute('class', 'col-fifth col-fourth col-third');
 
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');

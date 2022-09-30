@@ -3,9 +3,15 @@
 }
 
 .container {
-  max-width: 960px;
+  max-width: 75%;
   margin: 0 auto;
   padding: 0 1.5rem;
+}
+
+.form-container {
+  display: flex;
+  justify-content: center;
+  margin: 1.25rem;
 }
 
 .card-modal-container {
@@ -19,14 +25,35 @@
   width: 100%;
 }
 
+.card-modal-wrapper {
+  width: 525px;
+  background-color: white;
+  padding: 25px 20px;
+  border-radius: 6px;
+}
+
+.card-width {
+  max-width: 75%;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
 .row {
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .card-row {
   flex-wrap: wrap;
+}
+
+.nav-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 }
 
 .col-full {
@@ -42,4 +69,72 @@
   width: calc(100% / 5);
   padding: 0 0.5rem;
   margin-bottom: 1rem;
+}
+
+@media screen and (max-width: 1440px) {
+  .clow-card-text p {
+    font-size: 1vw;
+  }
+}
+
+@media screen and (max-width: 1245px) {
+  .clow-card-text p {
+    font-size: 1vw;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .col-fourth {
+    width: calc(100% / 4);
+  }
+}
+
+@media screen and (max-width: 915px) {
+  .col-third {
+    width: calc(100% / 3);
+  }
+
+  .clow-card-text p {
+    font-size: 1.5vw;
+  }
+}
+
+@media screen and (max-width: 712px) {
+  .col-third {
+    width: calc(100% / 2);
+  }
+
+  .clow-card-text p {
+    font-size: 2.5vw;
+  }
+
+  .nav-row {
+    flex-direction: column;
+  }
+
+  .nav-links,
+  .nav-header {
+    display: flex;
+    justify-content: center;
+  }
+
+  .container {
+    margin-top: 10px;
+  }
+}
+
+@media screen and (min-width: 250px) and (max-width: 490px) {
+  .col-fifth {
+    width: 100%;
+  }
+
+  .clow-card-text p {
+    font-size: 4vw;
+  }
+}
+
+@media screen and (max-width: 405px) {
+  .nav-header .col-full {
+    width: 350px;
+  }
 }
