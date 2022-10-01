@@ -1,9 +1,10 @@
-var $cardWrapper = document.querySelector('.clow-card-wrapper');
 var $overlay = document.querySelector('.overlay');
 var $cardModalContainer = document.querySelector('.card-modal-container');
+var $cardWrapper = document.querySelector('.clow-card-wrapper');
 var $modalRow = document.querySelector('.modal-row');
 
 $cardWrapper.addEventListener('click', handleClick);
+$cardWrapper.addEventListener('click', faveClick);
 window.addEventListener('click', handleClickOff);
 
 function handleClick(event) {
@@ -31,12 +32,29 @@ function handleClickOff(event) {
   if (event.target.className !== 'card-modal-container') {
     return;
   }
+
   $overlay.className = 'overlay hidden';
   $cardModalContainer.className = 'card-modal-container hidden';
 
   // As long as modal div has children, remove them all
   while ($modalRow.firstChild) {
     $modalRow.removeChild($modalRow.firstChild);
+  }
+}
+
+function faveClick(event) {
+  if (event.target.tagName !== 'I') {
+    return;
+  }
+
+  var id = event.target.getAttribute('data-id');
+
+  if (event.target.className === 'fa-regular fa-heart') {
+    event.target.className = 'fa-solid fa-heart';
+    localStorage.setItem(id, true);
+  } else {
+    event.target.className = 'fa-regular fa-heart';
+    localStorage.setItem(id, false);
   }
 }
 

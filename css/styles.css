@@ -29,6 +29,10 @@ input:focus {
   border: 2px solid rgb(194, 128, 172);
 }
 
+i:hover {
+  cursor: pointer;
+}
+
 .text-gray {
   color: rgb(172, 169, 170);
 }

@@ -1,5 +1,13 @@
 /* exported data */
 
+var data = {
+  view: 'card-list',
+  heartStatus: 'empty',
+  faves: [],
+  editing: null,
+  id: null
+};
+
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
 
 /*
@@ -38,7 +46,17 @@ function getCards(pageSize) {
 
       var $cardName = document.createElement('p');
       var $heartIcon = document.createElement('i');
-      $heartIcon.setAttribute('class', 'fa-regular fa-heart');
+      $heartIcon.setAttribute('data-id', xhr.response.data[i]._id);
+
+      for (var j = 0; j < localStorage.length; j++) {
+        var local = localStorage.getItem(localStorage.key(i));
+        if (local === 'true') {
+          $heartIcon.setAttribute('class', 'fa-solid fa-heart');
+        } else {
+          $heartIcon.setAttribute('class', 'fa-regular fa-heart');
+
+        }
+      }
 
       var $cardTitle = document.createElement('span');
       $cardTitle.setAttribute('class', 'card-title');
