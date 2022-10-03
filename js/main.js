@@ -42,6 +42,7 @@ function handleClickOff(event) {
   }
 }
 
+// Store button state in local storage
 function faveClick(event) {
   if (event.target.tagName !== 'I') {
     return;

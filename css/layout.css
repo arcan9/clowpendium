@@ -123,6 +123,11 @@
   .col-fourth {
     width: calc(100% / 4);
   }
+
+  .f-card-width {
+    max-width: 40%;
+    margin: 0 auto;
+  }
 }
 
 @media screen and (max-width: 915px) {
@@ -132,6 +137,11 @@
 
   .clow-card-text p {
     font-size: 1.5vw;
+  }
+
+  .f-card-width {
+    max-width: 50%;
+    margin: 0 auto;
   }
 }
 
@@ -157,7 +167,19 @@
   .container {
     margin-top: 10px;
   }
+
+  .f-card-width {
+    max-width: 80%;
+    margin: 0 auto;
+  }
 }
+
+/* @media screen and (max-width: 600px) {
+  .f-card-width {
+    max-width: 90%;
+    margin: 0 auto;
+  }
+} */
 
 @media screen and (min-width: 250px) and (max-width: 490px) {
   .col-fifth {
@@ -167,10 +189,20 @@
   .clow-card-text p {
     font-size: 4vw;
   }
+
+  .f-row {
+    height: 100%;
+  }
 }
 
 @media screen and (max-width: 405px) {
   .nav-header .col-full {
     width: 350px;
+  }
+}
+
+@media screen and (max-width: 345px) {
+  .d-flex {
+    flex-direction: column;
   }
 }
