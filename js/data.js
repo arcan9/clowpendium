@@ -2,7 +2,6 @@
 
 var data = {
   view: 'card-list',
-  heartStatus: 'empty',
   faves: [],
   editing: null,
   id: null
@@ -47,6 +46,7 @@ function getCards(pageSize) {
       var $cardName = document.createElement('p');
       var $heartIcon = document.createElement('i');
       $heartIcon.setAttribute('data-id', xhr.response.data[i]._id);
+      $heartIcon.setAttribute('class', 'fa-regular fa-heart');
 
       for (var j = 0; j < localStorage.length; j++) {
         var local = localStorage.getItem(localStorage.key(i));

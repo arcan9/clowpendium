@@ -22,9 +22,17 @@ input {
   padding: 0.75rem 0.25rem;
 }
 
+i:hover {
+  cursor: pointer;
+}
+
 h2.favorites {
   font-family: "Proza Libre", serif;
-  margin: 30px 16px;
+  margin: 30px 16px 20px;
+}
+
+h2.favorites i:hover {
+  cursor: default;
 }
 
 h3,
@@ -37,15 +45,11 @@ input:focus {
   border: 2px solid rgb(194, 128, 172);
 }
 
-i:hover {
-  cursor: pointer;
-}
-
-.delete-anchor-div a {
+div.delete-anchor-div a {
   color: rgb(172, 169, 170);
 }
 
-.overlay {
+div.overlay {
   position: fixed;
   top: 0;
   bottom: 0;
@@ -60,14 +64,14 @@ i:hover {
 
 /* NAV */
 
-.color-block-bg {
+div.color-block-bg {
   background: rgb(194, 128, 172);
   background: linear-gradient(295deg, rgba(194, 128, 172, 1) 28%, rgba(142, 117, 185, 1) 89%);
   margin: 0;
   padding: 0.75rem;
 }
 
-.nav-header {
+h3.nav-header {
   margin: 0;
   font-family: "Proza Libre", serif;
   font-size: 1.6rem;
@@ -75,23 +79,23 @@ i:hover {
   letter-spacing: 2px;
 }
 
-.nav-links {
+ul.nav-links {
   list-style: none;
   padding: 0;
   text-align: right;
 }
 
-.nav-links a {
+ul.nav-links a {
   text-decoration: none;
   color: white;
 }
 
-.nav-links a:hover {
+ul.nav-links a:hover {
   text-decoration: underline;
   cursor: pointer;
 }
 
-.nav-links li {
+ul.nav-links li {
   display: inline;
   margin: 0 13px;
   font-size: 0.938rem;
@@ -99,7 +103,7 @@ i:hover {
 
 /* MAIN */
 
-.clow-card {
+div.clow-card {
   margin: auto 1rem;
   margin-bottom: 1rem;
   border: 1px solid rgb(199 199 199);
@@ -109,33 +113,36 @@ i:hover {
   background-color: white;
 }
 
-.clow-card img:hover {
+div.clow-card img:hover {
   cursor: pointer;
 }
 
-.clow-card-wrapper,
-.f-clow-card-wrapper {
+div.clow-card-wrapper {
   margin: 30px auto;
 }
 
-.clow-card-text {
+div.f-clow-card-wrapper {
+  margin: 20px auto;
+}
+
+div.clow-card-text {
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 1.1vw;
 }
 
-.clow-card-text .fa-heart {
+div.clow-card-text i.fa-heart {
   margin: 0 4px;
 }
 
 /* FAVES LIST */
 
-.f-clow-card {
+div.f-clow-card {
   padding: 13px;
 }
 
-.delete-anchor-div {
+div.delete-anchor-div {
   padding: 0.5rem 0.5rem 0;
   text-decoration: underline;
 }
@@ -156,7 +163,11 @@ p.note {
   color: rgb(172, 169, 170);
 }
 
-.edit-btn {
+p.no-faves-text {
+  text-align: center;
+}
+
+div.edit-btn {
   text-align: right;
   font-size: 1.375rem;
 }
