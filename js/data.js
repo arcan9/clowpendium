@@ -4,8 +4,19 @@ var data = {
   view: 'card-list',
   faves: [],
   editing: null,
-  id: null
+  itemId: 0
 };
+
+window.addEventListener('beforeunload', function () {
+  var faveItemsJSON = JSON.stringify(data);
+  localStorage.setItem('fave-item', faveItemsJSON);
+});
+
+var getFaveItem = localStorage.getItem('fave-item');
+
+if (getFaveItem !== null) {
+  data = JSON.parse(getFaveItem);
+}
 
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
 
@@ -33,7 +44,7 @@ function getCards(pageSize) {
 
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');
-      $clowCard.setAttribute('data-card-num', xhr.response.data[i].cardNumber);
+      $clowCard.setAttribute('data-number', xhr.response.data[i].cardNumber);
 
       var $cardImg = document.createElement('img');
       $cardImg.setAttribute('src', xhr.response.data[i].clowCard);

@@ -2,6 +2,7 @@ var $overlay = document.querySelector('.overlay');
 var $cardModalContainer = document.querySelector('.card-modal-container');
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
 var $modalRow = document.querySelector('.modal-row');
+var $fCardWidth = document.querySelector('.f-card-width');
 
 $cardWrapper.addEventListener('click', handleClick);
 $cardWrapper.addEventListener('click', faveClick);
@@ -42,22 +43,129 @@ function handleClickOff(event) {
   }
 }
 
-// Store button state in local storage
+// Store button state in local storage on click
 function faveClick(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
 
   var id = event.target.getAttribute('data-id');
+  var $cardDivId = document.querySelector('div[data-id="' + id + '"]');
+  console.log('value of $cardDivId', $cardDivId);
 
   if (event.target.className === 'fa-regular fa-heart') {
     event.target.className = 'fa-solid fa-heart';
     localStorage.setItem(id, true);
-  } else {
+    if (localStorage.getItem(id)) {
+      data.itemId++;
+      data.faves.unshift(id);
+      renderFavorite(id);
+    }
+  } else { // if heart icon is solid
     event.target.className = 'fa-regular fa-heart';
     localStorage.setItem(id, false);
+    // spliceFaves(id);
+    if ($cardDivId) {
+      $cardDivId.remove();
+    }
+  }
+  console.log('value of data.faves', data.faves);
+  console.log('value of id', id);
+
+  // add heart button's id to data.id
+  // prepend to f-card-width
+}
+
+function spliceFaves(faveId) {
+  for (var i = 0; i < data.faves.length; i++) {
+    if (data.faves[i] === faveId) {
+      data.faves.splice(i, 1);
+    }
   }
 }
+
+function renderFavorite(faveId) {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card/' + faveId);
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+
+    var $fClowCardWrapper = document.createElement('div');
+    $fClowCardWrapper.setAttribute('class', 'f-clow-card-wrapper row');
+    $fClowCardWrapper.setAttribute('data-id', xhr.response._id);
+
+    var $clowCard = document.createElement('div');
+    $clowCard.setAttribute('class', 'clow-card f-clow-card col-full');
+
+    var $fRow = document.createElement('div');
+    $fRow.setAttribute('class', 'f-row');
+
+    var $colHalf = document.createElement('div');
+    $colHalf.setAttribute('class', 'col-half');
+
+    var $fImgContainer = document.createElement('div');
+    $fImgContainer.setAttribute('class', 'f-img-container');
+
+    var $clowCardImg = document.createElement('img');
+    $clowCardImg.setAttribute('src', xhr.response.clowCard);
+    $clowCardImg.setAttribute('class', 'clow-card-img');
+    // $clowCardImg.setAttribute('data-id', xhr.response._id);
+
+    var $colHalf2nd = document.createElement('div');
+    $colHalf2nd.setAttribute('class', 'col-half');
+
+    var $dFlex = document.createElement('div');
+    $dFlex.setAttribute('class', 'd-flex');
+
+    var $colHalfSub = document.createElement('div');
+    var $colHalfSub2 = document.createElement('div');
+    $colHalfSub.setAttribute('class', 'col-half');
+    $colHalfSub2.setAttribute('class', 'col-half');
+
+    var $h3 = document.createElement('h3');
+
+    var $editBtn = document.createElement('div');
+    $editBtn.setAttribute('class', 'edit-btn');
+
+    var $penToSquare = document.createElement('i');
+    $penToSquare.setAttribute('class', 'fa-regular fa-pen-to-square text-gray');
+
+    var $note = document.createElement('p');
+    $note.setAttribute('class', 'note');
+
+    var $notePreview = document.createElement('p');
+    $notePreview.setAttribute('class', 'note-preview');
+
+    var $deleteAnchorDiv = document.createElement('div');
+    $deleteAnchorDiv.setAttribute('class', 'delete-anchor-div');
+
+    var $anchor = document.createElement('a');
+    $anchor.setAttribute('href', '#');
+
+    $fClowCardWrapper.appendChild($clowCard);
+    $clowCard.append($fRow, $deleteAnchorDiv);
+    $fRow.append($colHalf, $colHalf2nd);
+    $deleteAnchorDiv.appendChild($anchor);
+    $colHalf.appendChild($fImgContainer);
+    $fImgContainer.appendChild($clowCardImg);
+    $colHalf2nd.append($dFlex, $note, $notePreview);
+    $dFlex.append($colHalfSub, $colHalfSub2);
+    $colHalfSub.appendChild($h3);
+    $colHalfSub2.appendChild($editBtn);
+    $editBtn.appendChild($penToSquare);
+
+    $h3.textContent = xhr.response.englishName;
+    $note.textContent = 'Note';
+    $notePreview.textContent = 'This is a note.';
+    $anchor.textContent = 'delete';
+
+    $fCardWidth.appendChild($fClowCardWrapper);
+    // localStorage.setItem('wasAppended', true);
+  });
+  xhr.send();
+}
+
+// renderFavorite('6039396a68347a4a842920cf');
 
 /*
 MODAL DOM TREE
