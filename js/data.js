@@ -7,6 +7,7 @@ var data = {
   itemId: 0
 };
 
+/*
 window.addEventListener('beforeunload', function () {
   var faveItemsJSON = JSON.stringify(data);
   localStorage.setItem('fave-item', faveItemsJSON);
@@ -17,9 +18,9 @@ var getFaveItem = localStorage.getItem('fave-item');
 if (getFaveItem !== null) {
   data = JSON.parse(getFaveItem);
 }
+ */
 
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
-
 /*
 DOM TREE
 
@@ -33,9 +34,9 @@ DOM TREE
 </div>
 */
 
-function getCards(pageSize) {
+function getCards() {
   var xhr = new XMLHttpRequest();
-  xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card?pageSize=' + pageSize);
+  xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card?pageSize=55');
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
     for (var i = 0; i < xhr.response.data.length; i++) {
@@ -57,17 +58,15 @@ function getCards(pageSize) {
       var $cardName = document.createElement('p');
       var $heartIcon = document.createElement('i');
       $heartIcon.setAttribute('data-id', xhr.response.data[i]._id);
-      $heartIcon.setAttribute('class', 'fa-regular fa-heart');
+      $heartIcon.setAttribute('class', 'fa-regular fa-heart heart');
 
-      for (var j = 0; j < localStorage.length; j++) {
-        var local = localStorage.getItem(localStorage.key(i));
-        if (local === 'true') {
-          $heartIcon.setAttribute('class', 'fa-solid fa-heart');
-        } else {
-          $heartIcon.setAttribute('class', 'fa-regular fa-heart');
-
-        }
-      }
+      // var localValues = localStorage.getItem(localStorage.key(i));
+      // if (localValues === 'false' || localValues === null) {
+      //   $heartIcon.setAttribute('class', 'fa-regular fa-heart');
+      // } else {
+      //   $heartIcon.setAttribute('class', 'fa-solid fa-heart');
+      // }
+      // console.log(localValues);
 
       var $cardTitle = document.createElement('span');
       $cardTitle.setAttribute('class', 'card-title');
@@ -81,9 +80,47 @@ function getCards(pageSize) {
       $cardTitle.appendChild($nameTextNode);
 
       $cardWrapper.appendChild($colFifth);
+
     }
   });
   xhr.send();
+  xhr.addEventListener('load', function (event) {
+    var $heartIcons = document.querySelectorAll('.heart');
+    var temp = [];
+
+    for (var i = 0; i < $heartIcons.length; i++) {
+      var $heartIdNum = $heartIcons[i].getAttribute('data-id');
+      temp.push($heartIdNum);
+    }
+
+    for (var keys in localStorage) {
+      var LSValue = localStorage.getItem(keys);
+
+      for (var j = 0; j < temp.length; j++) {
+        if (keys === temp[j]) {
+          if (LSValue === 'true') {
+            var preserveButton = document.querySelector('i[data-id="' + temp[j] + '"]');
+            preserveButton.className = 'fa-solid fa-heart heart';
+          }
+        }
+      }
+    }
+
+    // find matching key in local storage
+    // loop thru $heartIcons
+    // if $heartIcon[i] is equal to localStorage[keys]
+    // then $heartIcon[i].className = ''
+
+    // for (var i = 0; i < $heartIcons.length; i++) {
+    //   if ($heartIcons[i].className === 'fa-regular fa-heart heart') {
+    //     console.log('regular');
+    //   } else {
+    //     console.log('filled');
+    //   }
+    // }
+    // console.log($heartIcons);
+  });
+
 }
 
-getCards(55);
+getCards();

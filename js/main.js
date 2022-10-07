@@ -2,7 +2,7 @@ var $overlay = document.querySelector('.overlay');
 var $cardModalContainer = document.querySelector('.card-modal-container');
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
 var $modalRow = document.querySelector('.modal-row');
-var $fCardWidth = document.querySelector('.f-card-width');
+var $fClowContainer = document.querySelector('.f-clow-container');
 
 $cardWrapper.addEventListener('click', handleClick);
 $cardWrapper.addEventListener('click', faveClick);
@@ -51,38 +51,27 @@ function faveClick(event) {
 
   var id = event.target.getAttribute('data-id');
   var $cardDivId = document.querySelector('div[data-id="' + id + '"]');
-  console.log('value of $cardDivId', $cardDivId);
 
-  if (event.target.className === 'fa-regular fa-heart') {
-    event.target.className = 'fa-solid fa-heart';
+  if (event.target.className === 'fa-regular fa-heart heart') {
+    event.target.className = 'fa-solid fa-heart heart';
     localStorage.setItem(id, true);
-    if (localStorage.getItem(id)) {
-      data.itemId++;
-      data.faves.unshift(id);
-      renderFavorite(id);
-    }
-  } else { // if heart icon is solid
-    event.target.className = 'fa-regular fa-heart';
+    renderFavorite(id);
+  } else {
+    event.target.className = 'fa-regular fa-heart heart';
     localStorage.setItem(id, false);
-    // spliceFaves(id);
     if ($cardDivId) {
       $cardDivId.remove();
     }
   }
-  console.log('value of data.faves', data.faves);
-  console.log('value of id', id);
-
-  // add heart button's id to data.id
-  // prepend to f-card-width
 }
 
-function spliceFaves(faveId) {
-  for (var i = 0; i < data.faves.length; i++) {
-    if (data.faves[i] === faveId) {
-      data.faves.splice(i, 1);
-    }
-  }
-}
+// function spliceFaves(faveId) {
+//   for (var i = 0; i < data.faves.length; i++) {
+//     if (data.faves[i] === faveId) {
+//       data.faves.splice(i, 1);
+//     }
+//   }
+// }
 
 function renderFavorite(faveId) {
   var xhr = new XMLHttpRequest();
@@ -109,7 +98,6 @@ function renderFavorite(faveId) {
     var $clowCardImg = document.createElement('img');
     $clowCardImg.setAttribute('src', xhr.response.clowCard);
     $clowCardImg.setAttribute('class', 'clow-card-img');
-    // $clowCardImg.setAttribute('data-id', xhr.response._id);
 
     var $colHalf2nd = document.createElement('div');
     $colHalf2nd.setAttribute('class', 'col-half');
@@ -159,14 +147,32 @@ function renderFavorite(faveId) {
     $notePreview.textContent = 'This is a note.';
     $anchor.textContent = 'delete';
 
-    $fCardWidth.appendChild($fClowCardWrapper);
-    // localStorage.setItem('wasAppended', true);
+    // console.log('value of $fClowCardWrapper (from render function)', $fClowCardWrapper);
+    $fClowContainer.appendChild($fClowCardWrapper);
   });
   xhr.send();
 }
 
 // renderFavorite('6039396a68347a4a842920cf');
 
+document.addEventListener('DOMContentLoaded', function (event) {
+  // var $heartIcons = document.getElementsByClassName('fa-regular fa-heart');
+  // for (var i = 0; i < $heartIcons.length; i++) {
+  //   console.log('hi');
+  // }
+  // console.log($heartIcons);
+  for (var keys in localStorage) {
+    // console.log(localStorage[keys]);
+    if (localStorage[keys] === 'true') {
+      // console.log(keys);
+
+      renderFavorite(keys);
+    }
+  }
+
+});
+
+// console.log(localStorage);
 /*
 MODAL DOM TREE
 
