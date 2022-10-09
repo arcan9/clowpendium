@@ -72,6 +72,70 @@ function faveClick(event) {
 //     }
 //   }
 // }
+var $favesList = document.querySelector('[data-view="faves-list"]');
+var $cardsView = document.querySelector('[data-view="cards-view"]');
+var $formContainer = document.querySelector('.form-container');
+var $favoritesAnchor = document.querySelector('.favoritesAnchor');
+var $navHeader = document.querySelector('.nav-header');
+
+$favoritesAnchor.addEventListener('click', showFavoritesList);
+// $favoritesAnchor.addEventListener('click', keepFavoriteView);
+$navHeader.addEventListener('click', showCardList);
+
+function showFavoritesList() {
+  $favesList.className = '';
+  $cardsView.className = 'hidden';
+  $formContainer.className = 'form-container hidden';
+  localStorage.setItem('faves', 'viewed');
+  // data.view = 'faves-list';
+}
+
+function showCardList() {
+  $favesList.className = 'hidden';
+  $cardsView.className = '';
+  $formContainer.className = 'form-container';
+  localStorage.setItem('faves', 'hide');
+  // data.view = 'card-list';
+}
+
+document.addEventListener('DOMContentLoaded', function (event) {
+  var faves = localStorage.getItem('faves');
+
+  if (faves === 'viewed') {
+    showFavoritesList();
+  }
+
+  for (var keys in localStorage) {
+    if (localStorage[keys] === 'true') {
+      renderFavorite(keys);
+    }
+  }
+});
+
+/*
+FAVORITES LIST DOM TREE
+
+<div class="f-clow-card-wrapper row" data-id="">
+  <div class="clow-card f-clow-card col-full">
+    <div class="f-row">
+      <div class="col-half">
+        <div class="f-img-container">
+          <img src="images/ClowJump.jpg" class="clow-card-img">
+        </div>
+      </div>
+      <div class="col-half">
+        <div class="d-flex">
+          <div class="col-half"><h3>The Jump</h3></div>
+          <div class="col-half"><div class="edit-btn"><i class="fa-regular fa-pen-to-square text-gray"></i></div></div>
+        </div>
+        <p class="note">Note</p>
+        <p class="note-preview">This is a note. Lorem ipsum dolor sit amet, consectetur adipiscing elit,</p>
+      </div>
+    </div>
+    <div class="delete-anchor-div"><a href="#">delete</a></div>
+  </div>
+</div>
+*/
 
 function renderFavorite(faveId) {
   var xhr = new XMLHttpRequest();
@@ -147,32 +211,11 @@ function renderFavorite(faveId) {
     $notePreview.textContent = 'This is a note.';
     $anchor.textContent = 'delete';
 
-    // console.log('value of $fClowCardWrapper (from render function)', $fClowCardWrapper);
     $fClowContainer.appendChild($fClowCardWrapper);
   });
   xhr.send();
 }
 
-// renderFavorite('6039396a68347a4a842920cf');
-
-document.addEventListener('DOMContentLoaded', function (event) {
-  // var $heartIcons = document.getElementsByClassName('fa-regular fa-heart');
-  // for (var i = 0; i < $heartIcons.length; i++) {
-  //   console.log('hi');
-  // }
-  // console.log($heartIcons);
-  for (var keys in localStorage) {
-    // console.log(localStorage[keys]);
-    if (localStorage[keys] === 'true') {
-      // console.log(keys);
-
-      renderFavorite(keys);
-    }
-  }
-
-});
-
-// console.log(localStorage);
 /*
 MODAL DOM TREE
 
@@ -241,3 +284,84 @@ function renderCard(id) {
   });
   xhr.send();
 }
+
+/*
+MAIN DOM TREE
+
+<div class="col-fifth col-fourth col-third">
+  <div class="clow-card" data-card-num="">
+    <img src="images/ClowJump.jpg" class="clow-card-img" data-id="603a6076e708590015ca94d1">
+    <div class="clow-card-text">
+      <p><i class="fa-regular fa-heart"></i> <span class="card-title">The Jump</span></p>
+    </div>
+  </div>
+</div>
+*/
+
+function getCards() {
+  var xhr = new XMLHttpRequest();
+  xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card?pageSize=55');
+  xhr.responseType = 'json';
+  xhr.addEventListener('load', function () {
+    for (var i = 0; i < xhr.response.data.length; i++) {
+      var $colFifth = document.createElement('div');
+      $colFifth.setAttribute('class', 'col-fifth col-fourth col-third');
+
+      var $clowCard = document.createElement('div');
+      $clowCard.setAttribute('class', 'clow-card');
+      $clowCard.setAttribute('data-number', xhr.response.data[i].cardNumber);
+
+      var $cardImg = document.createElement('img');
+      $cardImg.setAttribute('src', xhr.response.data[i].clowCard);
+      $cardImg.setAttribute('class', 'clow-card-img');
+      $cardImg.setAttribute('data-id', xhr.response.data[i]._id);
+
+      var $clowCardText = document.createElement('div');
+      $clowCardText.setAttribute('class', 'clow-card-text');
+
+      var $cardName = document.createElement('p');
+      var $heartIcon = document.createElement('i');
+      $heartIcon.setAttribute('data-id', xhr.response.data[i]._id);
+      $heartIcon.setAttribute('class', 'fa-regular fa-heart heart');
+
+      var $cardTitle = document.createElement('span');
+      $cardTitle.setAttribute('class', 'card-title');
+
+      var $nameTextNode = document.createTextNode(xhr.response.data[i].englishName);
+
+      $colFifth.appendChild($clowCard);
+      $clowCard.append($cardImg, $clowCardText);
+      $clowCardText.appendChild($cardName);
+      $cardName.append($heartIcon, $cardTitle);
+      $cardTitle.appendChild($nameTextNode);
+
+      $cardWrapper.appendChild($colFifth);
+
+    }
+  });
+  xhr.send();
+  xhr.addEventListener('load', function (event) {
+    var $heartIcons = document.querySelectorAll('.heart');
+    var temp = [];
+
+    for (var i = 0; i < $heartIcons.length; i++) {
+      var $heartIdNum = $heartIcons[i].getAttribute('data-id');
+      temp.push($heartIdNum);
+    }
+
+    for (var keys in localStorage) {
+      var LSValue = localStorage.getItem(keys);
+
+      for (var j = 0; j < temp.length; j++) {
+        if (keys === temp[j]) {
+          if (LSValue === 'true') {
+            var preserveButton = document.querySelector('i[data-id="' + temp[j] + '"]');
+            preserveButton.className = 'fa-solid fa-heart heart';
+          }
+        }
+      }
+    }
+  });
+}
+
+getCards();

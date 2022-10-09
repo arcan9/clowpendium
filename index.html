@@ -27,12 +27,12 @@
       <div class="container">
         <div class="nav-row">
           <div class="col-full">
-            <h3 class="nav-header"><i class="fa-solid fa-feather-pointed"></i> <a href="index.html">Clowpendium</a></h3>
+            <h3 class="nav-header"><i class="fa-solid fa-feather-pointed"></i> Clowpendium</a></h3>
           </div>
           <div class="col-full">
             <ul class="nav-links">
               <li><a href="#">About</a></li>
-              <li><a href="#">Favorite Cards</a></li>
+              <li class="favoritesAnchor"><a href="#">Favorite Cards</a></li>
             </ul>
           </div>
         </div>
@@ -40,7 +40,7 @@
     </div>
   </nav>
   <main>
-    <div data-view="faves-list">
+    <div data-view="faves-list" class="hidden">
       <div class="f-card-width">
         <h2 class="favorites">Favorites <i class="fa-solid fa-heart"></i></h3>
         <div class="col-full">
@@ -77,7 +77,7 @@
         <input type="text" id="search-input" placeholder="Search">
       </form>
     </div>
-    <div data-view="cards-view">
+    <div data-view="cards-view" class="">
       <div class="card-width">
         <div class="clow-card-wrapper card-row row">
         </div>
