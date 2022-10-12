@@ -44,26 +44,44 @@ function handleClickOff(event) {
 }
 
 // Store button state in local storage on click
+const arr = [];
+
 function faveClick(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
 
+  const $filledHearts = document.querySelectorAll('.fa-solid.fa-heart.heart');
   var id = event.target.getAttribute('data-id');
   var $cardDivId = document.querySelector('div[data-id="' + id + '"]');
+
+  // for (let i = 0; i < $filledHearts.length; i++) {
+  //   console.log(i);
+  // }
 
   if (event.target.className === 'fa-regular fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart';
     localStorage.setItem(id, true);
+    localStorage.setItem('listHasItems', 'has items');
+    arr.push(event.target);
     renderFavorite(id);
   } else {
     event.target.className = 'fa-regular fa-heart heart';
     localStorage.setItem(id, false);
+    arr.splice(event.target, 1);
     if ($cardDivId) {
       $cardDivId.remove();
     }
   }
+
+  console.log('value of arr:', arr);
+  console.log('length of arr:', arr.length);
+  return arr;
+
+  // console.log('value of $filledHearts:', $filledHearts);
+  // console.log('length of $filledHearts:', $filledHearts.length);
 }
+// console.log('value of arr outside of callback:', arr);
 
 // function spliceFaves(faveId) {
 //   for (var i = 0; i < data.faves.length; i++) {
@@ -83,11 +101,23 @@ $favoritesAnchor.addEventListener('click', showFavoritesList);
 $navHeader.addEventListener('click', showCardList);
 
 function showFavoritesList() {
+  const $noFavesCol = document.querySelector('.no-faves-col');
+  const $fClowCardWrapper = document.querySelectorAll('.f-clow-card-wrapper');
+  const listHasItems = localStorage.getItem('listHasItems');
+  console.log($fClowCardWrapper);
+
+  if ($fClowCardWrapper.length === 0) {
+    $noFavesCol.className = 'col-full no-faves-col';
+  }
+
+  if (listHasItems === 'has items') {
+    $noFavesCol.className = 'col-full no-faves-col hidden';
+  }
+
   $favesList.className = '';
   $cardsView.className = 'hidden';
   $formContainer.className = 'form-container hidden';
   localStorage.setItem('faves', 'viewed');
-  // data.view = 'faves-list';
 }
 
 function showCardList() {
@@ -95,11 +125,26 @@ function showCardList() {
   $cardsView.className = '';
   $formContainer.className = 'form-container';
   localStorage.setItem('faves', 'hide');
-  // data.view = 'card-list';
 }
+
+window.addEventListener('beforeunload', () => {
+  const $fClowCardWrapper = document.querySelectorAll('.f-clow-card-wrapper');
+
+  if ($fClowCardWrapper.length > 0) {
+    localStorage.setItem('listHasItems', 'has items');
+  } else if ($fClowCardWrapper.length <= 0) {
+    localStorage.setItem('listHasItems', 'no items');
+  }
+});
 
 document.addEventListener('DOMContentLoaded', function (event) {
   var faves = localStorage.getItem('faves');
+  const $noFavesCol = document.querySelector('.no-faves-col');
+  const listHasItems = localStorage.getItem('listHasItems');
+
+  if (listHasItems === 'has items') {
+    $noFavesCol.className = 'col-full no-faves-col hidden';
+  }
 
   if (faves === 'viewed') {
     showFavoritesList();
@@ -342,8 +387,8 @@ function getCards() {
   xhr.send();
   xhr.addEventListener('load', function (event) {
     var $heartIcons = document.querySelectorAll('.heart');
-    var temp = [];
 
+    var temp = [];
     for (var i = 0; i < $heartIcons.length; i++) {
       var $heartIdNum = $heartIcons[i].getAttribute('data-id');
       temp.push($heartIdNum);
