@@ -44,7 +44,6 @@ function handleClickOff(event) {
 }
 
 // Store button state in local storage on click
-const arr = [];
 
 function faveClick(event) {
   if (event.target.tagName !== 'I') {
@@ -63,25 +62,18 @@ function faveClick(event) {
     event.target.className = 'fa-solid fa-heart heart';
     localStorage.setItem(id, true);
     localStorage.setItem('listHasItems', 'has items');
-    arr.push(event.target);
     renderFavorite(id);
   } else {
     event.target.className = 'fa-regular fa-heart heart';
     localStorage.setItem(id, false);
-    arr.splice(event.target, 1);
     if ($cardDivId) {
       $cardDivId.remove();
     }
   }
 
-  console.log('value of arr:', arr);
-  console.log('length of arr:', arr.length);
-  return arr;
-
   // console.log('value of $filledHearts:', $filledHearts);
   // console.log('length of $filledHearts:', $filledHearts.length);
 }
-// console.log('value of arr outside of callback:', arr);
 
 // function spliceFaves(faveId) {
 //   for (var i = 0; i < data.faves.length; i++) {
@@ -110,7 +102,9 @@ function showFavoritesList() {
     $noFavesCol.className = 'col-full no-faves-col';
   }
 
-  if (listHasItems === 'has items') {
+  const LSArray = Object.values(localStorage);
+
+  if (LSArray.includes('true')) {
     $noFavesCol.className = 'col-full no-faves-col hidden';
   }
 
