@@ -44,19 +44,13 @@ function handleClickOff(event) {
 }
 
 // Store button state in local storage on click
-
 function faveClick(event) {
   if (event.target.tagName !== 'I') {
     return;
   }
 
-  const $filledHearts = document.querySelectorAll('.fa-solid.fa-heart.heart');
   var id = event.target.getAttribute('data-id');
   var $cardDivId = document.querySelector('div[data-id="' + id + '"]');
-
-  // for (let i = 0; i < $filledHearts.length; i++) {
-  //   console.log(i);
-  // }
 
   if (event.target.className === 'fa-regular fa-heart heart') {
     event.target.className = 'fa-solid fa-heart heart';
@@ -70,9 +64,6 @@ function faveClick(event) {
       $cardDivId.remove();
     }
   }
-
-  // console.log('value of $filledHearts:', $filledHearts);
-  // console.log('length of $filledHearts:', $filledHearts.length);
 }
 
 // function spliceFaves(faveId) {
@@ -89,19 +80,17 @@ var $favoritesAnchor = document.querySelector('.favoritesAnchor');
 var $navHeader = document.querySelector('.nav-header');
 
 $favoritesAnchor.addEventListener('click', showFavoritesList);
-// $favoritesAnchor.addEventListener('click', keepFavoriteView);
 $navHeader.addEventListener('click', showCardList);
 
 function showFavoritesList() {
   const $noFavesCol = document.querySelector('.no-faves-col');
   const $fClowCardWrapper = document.querySelectorAll('.f-clow-card-wrapper');
-  const listHasItems = localStorage.getItem('listHasItems');
-  console.log($fClowCardWrapper);
 
   if ($fClowCardWrapper.length === 0) {
     $noFavesCol.className = 'col-full no-faves-col';
   }
 
+  // If there are true values in local storage, hide no faves text
   const LSArray = Object.values(localStorage);
 
   if (LSArray.includes('true')) {
@@ -121,6 +110,7 @@ function showCardList() {
   localStorage.setItem('faves', 'hide');
 }
 
+// stores a certain value to local storage before refresh
 window.addEventListener('beforeunload', () => {
   const $fClowCardWrapper = document.querySelectorAll('.f-clow-card-wrapper');
 
@@ -131,6 +121,9 @@ window.addEventListener('beforeunload', () => {
   }
 });
 
+// when page is refreshed and local storage has certain value
+// aka the favorites list has item(s),
+// then hide no faves text
 document.addEventListener('DOMContentLoaded', function (event) {
   var faves = localStorage.getItem('faves');
   const $noFavesCol = document.querySelector('.no-faves-col');
@@ -379,6 +372,7 @@ function getCards() {
     }
   });
   xhr.send();
+  // preserves button state when page is refreshed and cards are appended
   xhr.addEventListener('load', function (event) {
     var $heartIcons = document.querySelectorAll('.heart');
 
