@@ -3,10 +3,16 @@ var $cardModalContainer = document.querySelector('.card-modal-container');
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
 var $modalRow = document.querySelector('.modal-row');
 var $fClowContainer = document.querySelector('.f-clow-container');
+var $loaderContainer = document.querySelector('.loader-container');
 
 $cardWrapper.addEventListener('click', handleClick);
 $cardWrapper.addEventListener('click', faveClick);
 window.addEventListener('click', handleClickOff);
+window.addEventListener('load', handleLoader);
+
+function handleLoader() {
+  $loaderContainer.className = 'loader-container hidden';
+}
 
 function handleClick(event) {
   if (event.target.tagName !== 'IMG') {
@@ -66,13 +72,6 @@ function faveClick(event) {
   }
 }
 
-// function spliceFaves(faveId) {
-//   for (var i = 0; i < data.faves.length; i++) {
-//     if (data.faves[i] === faveId) {
-//       data.faves.splice(i, 1);
-//     }
-//   }
-// }
 var $favesList = document.querySelector('[data-view="faves-list"]');
 var $cardsView = document.querySelector('[data-view="cards-view"]');
 var $formContainer = document.querySelector('.form-container');
@@ -248,6 +247,44 @@ function renderFavorite(faveId) {
   xhr.send();
 }
 
+// wait x number of seconds so liveSearch doesn't slow down page
+var $searchInput = document.getElementById('search-input');
+var timer;
+var typeInterval = 500;
+
+$searchInput.addEventListener('keydown', liveSearch);
+$searchInput.addEventListener('keyup', () => {
+  clearTimeout(timer);
+  timer = setTimeout(liveSearch, typeInterval);
+});
+
+function liveSearch() {
+  var $card = document.querySelectorAll('.cc');
+  var $tryAgain = document.querySelector('.no-results');
+  var $query = $searchInput.value;
+  var $noResults = true;
+
+  for (var i = 0; i < $card.length; i++) {
+    if (!$card[i].textContent.toLowerCase().includes($query.toLowerCase())) {
+      $card[i].className = 'col-fifth col-fourth col-third cc hidden';
+    }
+
+    if ($card[i].textContent.toLowerCase().includes($query.toLowerCase())) {
+      $noResults = false; // if at least one card is found
+    }
+
+    if ($query === '') {
+      $card[i].className = 'col-fifth col-fourth col-third cc';
+    }
+
+    if ($noResults) {
+      $tryAgain.textContent = 'No results were found. Try again.';
+    } else {
+      $tryAgain.textContent = '';
+    }
+  }
+}
+
 /*
 MODAL DOM TREE
 
@@ -268,6 +305,7 @@ function renderCard(id) {
   xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
+    // $loaderContainer.className = 'loader-container hidden';
 
     var $colHalf = document.createElement('div');
     $colHalf.setAttribute('class', 'col-half appended-div');
@@ -337,7 +375,7 @@ function getCards() {
   xhr.addEventListener('load', function () {
     for (var i = 0; i < xhr.response.data.length; i++) {
       var $colFifth = document.createElement('div');
-      $colFifth.setAttribute('class', 'col-fifth col-fourth col-third');
+      $colFifth.setAttribute('class', 'col-fifth col-fourth col-third cc');
 
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');

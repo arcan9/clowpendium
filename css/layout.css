@@ -145,7 +145,7 @@
   }
 }
 
-@media screen and (max-width: 712px) {
+@media screen and (max-width: 768px) {
   .col-third {
     width: calc(100% / 2);
   }
@@ -173,13 +173,6 @@
     margin: 0 auto;
   }
 }
-
-/* @media screen and (max-width: 600px) {
-  .f-card-width {
-    max-width: 90%;
-    margin: 0 auto;
-  }
-} */
 
 @media screen and (min-width: 250px) and (max-width: 490px) {
   .col-fifth {
