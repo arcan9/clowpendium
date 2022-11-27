@@ -77,9 +77,12 @@ var $cardsView = document.querySelector('[data-view="cards-view"]');
 var $formContainer = document.querySelector('.form-container');
 var $favoritesAnchor = document.querySelector('.favoritesAnchor');
 var $navHeader = document.querySelector('.nav-header');
+var $aboutAnchor = document.querySelector('.aboutAnchor');
+var $about = document.querySelector('.about');
 
 $favoritesAnchor.addEventListener('click', showFavoritesList);
 $navHeader.addEventListener('click', showCardList);
+$aboutAnchor.addEventListener('click', showAbout);
 
 function showFavoritesList() {
   const $noFavesCol = document.querySelector('.no-faves-col');
@@ -102,11 +105,21 @@ function showFavoritesList() {
   localStorage.setItem('faves', 'viewed');
 }
 
+function showAbout() {
+  $about.className = 'about';
+  $cardsView.className = 'hidden';
+  $favesList.className = 'hidden';
+  $formContainer.className = 'form-container hidden';
+  localStorage.setItem('about', 'viewed');
+}
+
 function showCardList() {
   $favesList.className = 'hidden';
   $cardsView.className = '';
+  $about.className = 'about hidden';
   $formContainer.className = 'form-container';
   localStorage.setItem('faves', 'hide');
+  localStorage.setItem('about', 'hide');
 }
 
 // stores a certain value to local storage before refresh
@@ -125,6 +138,7 @@ window.addEventListener('beforeunload', () => {
 // then hide no faves text
 document.addEventListener('DOMContentLoaded', function (event) {
   var faves = localStorage.getItem('faves');
+  var about = localStorage.getItem('about');
   const $noFavesCol = document.querySelector('.no-faves-col');
   const listHasItems = localStorage.getItem('listHasItems');
 
@@ -134,6 +148,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   if (faves === 'viewed') {
     showFavoritesList();
+  }
+
+  if (about === 'viewed') {
+    showAbout();
   }
 
   for (var keys in localStorage) {
@@ -265,11 +283,11 @@ function liveSearch() {
   var $noResults = true;
 
   for (var i = 0; i < $card.length; i++) {
-    if (!$card[i].textContent.toLowerCase().includes($query.toLowerCase())) {
+    if (!$card[i].textContent.toLowerCase().includes($query.toLowerCase().trim())) {
       $card[i].className = 'col-fifth col-fourth col-third cc hidden';
     }
 
-    if ($card[i].textContent.toLowerCase().includes($query.toLowerCase())) {
+    if ($card[i].textContent.toLowerCase().includes($query.toLowerCase().trim())) {
       $noResults = false; // if at least one card is found
     }
 
@@ -278,7 +296,7 @@ function liveSearch() {
     }
 
     if ($noResults) {
-      $tryAgain.textContent = 'No results were found. Try again.';
+      $tryAgain.textContent = 'No results were found. Try searching again.';
     } else {
       $tryAgain.textContent = '';
     }
