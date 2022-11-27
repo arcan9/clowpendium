@@ -184,8 +184,13 @@ div.no-results {
   justify-content: center;
 }
 
-div.about {
+div.about,
+div.err {
   text-align: center;
+}
+
+div.err {
+  color: red;
 }
 
 .lds-dual-ring {

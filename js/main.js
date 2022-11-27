@@ -453,4 +453,9 @@ function getCards() {
   });
 }
 
+window.addEventListener('offline', event => {
+  var $err = document.querySelector('.err');
+  $err.className = 'err';
+});
+
 getCards();
