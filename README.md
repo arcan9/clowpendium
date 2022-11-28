@@ -28,3 +28,7 @@ Cardcaptor Sakura was one of my favorite shows growing up so I wanted to pay tri
 - User will be able to add notes to the card
 - User will be able to edit notes
 - User will be able to delete a card from their favorites
+
+## Preview
+
+![demo](images/ajax-demo1.gif)
