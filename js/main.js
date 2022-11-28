@@ -324,7 +324,6 @@ function renderCard(id) {
   xhr.open('GET', 'https://protected-taiga-89091.herokuapp.com/api/card/' + id);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    // $loaderContainer.className = 'loader-container hidden';
 
     var $colHalf = document.createElement('div');
     $colHalf.setAttribute('class', 'col-half appended-div');
