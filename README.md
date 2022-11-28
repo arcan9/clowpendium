@@ -11,6 +11,7 @@ Cardcaptor Sakura was one of my favorite shows growing up so I wanted to pay tri
 - HTML5
 - CSS3
 - JavaScript
+- [Sakura CardCaptor API](https://github.com/JessVel/sakura-card-captor-api)
 
 ## Live Demo
 
