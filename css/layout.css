@@ -32,7 +32,7 @@
 .card-modal-wrapper {
   width: 525px;
   background-color: white;
-  padding: 25px 20px;
+  padding: 1.563rem 1.25rem;
   border-radius: 6px;
 }
 
@@ -165,7 +165,7 @@
   }
 
   .container {
-    margin-top: 10px;
+    margin-top: 0.625rem;
   }
 
   .f-card-width {

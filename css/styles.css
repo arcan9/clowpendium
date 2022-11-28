@@ -41,7 +41,7 @@ i:hover {
 
 h2.favorites {
   font-family: "Proza Libre", serif;
-  margin: 30px 16px 20px;
+  margin: 1.875rem 1rem 1.25rem;
 }
 
 h2.favorites i:hover {
@@ -110,7 +110,7 @@ ul.nav-links a:hover {
 
 ul.nav-links li {
   display: inline;
-  margin: 0 13px;
+  margin: 0 0.813rem;
   font-size: 0.938rem;
 }
 
@@ -122,7 +122,7 @@ div.clow-card {
   border: 1px solid rgb(199 199 199);
   border-radius: 0.25rem;
   box-shadow: 0 6px 6px -4px rgb(0 0 0 / 30%);
-  padding: 13px 13px 0;
+  padding: 0.813rem 0.813rem 0;
   background-color: white;
 }
 
@@ -131,11 +131,11 @@ div.clow-card img:hover {
 }
 
 div.clow-card-wrapper {
-  margin: 30px auto;
+  margin: 1.875rem auto;
 }
 
 div.f-clow-card-wrapper {
-  margin: 20px auto;
+  margin: 1.25rem auto;
 }
 
 div.clow-card-text {
@@ -146,13 +146,13 @@ div.clow-card-text {
 }
 
 div.clow-card-text i.fa-heart {
-  margin: 0 4px;
+  margin: 0 0.25rem;
 }
 
 /* FAVES LIST */
 
 div.f-clow-card {
-  padding: 13px;
+  padding: 0.813rem;
 }
 
 div.delete-anchor-div {
@@ -161,7 +161,7 @@ div.delete-anchor-div {
 }
 
 p.note {
-  margin: 0 0 10px;
+  margin: 0 0 0.625rem;
   color: rgb(172, 169, 170);
 }
 
@@ -204,7 +204,7 @@ div.err {
   display: block;
   width: 64px;
   height: 64px;
-  margin: 8px;
+  margin: 0.5rem;
   border-radius: 50%;
   border: 6px solid #fcf;
   border-color: #fcf transparent;
