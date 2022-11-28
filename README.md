@@ -23,7 +23,7 @@ Cardcaptor Sakura was one of my favorite shows growing up so I wanted to pay tri
 - User can search for a card
 - User can add a card to their favorites
 
-# Stretch Features
+## Stretch Features
 
 - User will be able to add notes to the card
 - User will be able to edit notes
