@@ -32,7 +32,7 @@
 .card-modal-wrapper {
   width: 525px;
   background-color: white;
-  padding: 25px 20px;
+  padding: 1.563rem 1.25rem;
   border-radius: 6px;
 }
 
@@ -145,7 +145,7 @@
   }
 }
 
-@media screen and (max-width: 712px) {
+@media screen and (max-width: 768px) {
   .col-third {
     width: calc(100% / 2);
   }
@@ -165,21 +165,22 @@
   }
 
   .container {
-    margin-top: 10px;
+    margin-top: 0.625rem;
   }
 
   .f-card-width {
     max-width: 80%;
     margin: 0 auto;
   }
-}
 
-/* @media screen and (max-width: 600px) {
-  .f-card-width {
-    max-width: 90%;
-    margin: 0 auto;
+  .card-modal-wrapper {
+    width: 75%;
   }
-} */
+
+  .modal-row {
+    flex-direction: row;
+  }
+}
 
 @media screen and (min-width: 250px) and (max-width: 490px) {
   .col-fifth {

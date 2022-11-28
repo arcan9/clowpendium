@@ -3,10 +3,16 @@ var $cardModalContainer = document.querySelector('.card-modal-container');
 var $cardWrapper = document.querySelector('.clow-card-wrapper');
 var $modalRow = document.querySelector('.modal-row');
 var $fClowContainer = document.querySelector('.f-clow-container');
+var $loaderContainer = document.querySelector('.loader-container');
 
 $cardWrapper.addEventListener('click', handleClick);
 $cardWrapper.addEventListener('click', faveClick);
 window.addEventListener('click', handleClickOff);
+window.addEventListener('load', handleLoader);
+
+function handleLoader() {
+  $loaderContainer.className = 'loader-container hidden';
+}
 
 function handleClick(event) {
   if (event.target.tagName !== 'IMG') {
@@ -66,21 +72,17 @@ function faveClick(event) {
   }
 }
 
-// function spliceFaves(faveId) {
-//   for (var i = 0; i < data.faves.length; i++) {
-//     if (data.faves[i] === faveId) {
-//       data.faves.splice(i, 1);
-//     }
-//   }
-// }
 var $favesList = document.querySelector('[data-view="faves-list"]');
 var $cardsView = document.querySelector('[data-view="cards-view"]');
 var $formContainer = document.querySelector('.form-container');
 var $favoritesAnchor = document.querySelector('.favoritesAnchor');
 var $navHeader = document.querySelector('.nav-header');
+var $aboutAnchor = document.querySelector('.aboutAnchor');
+var $about = document.querySelector('.about');
 
 $favoritesAnchor.addEventListener('click', showFavoritesList);
 $navHeader.addEventListener('click', showCardList);
+$aboutAnchor.addEventListener('click', showAbout);
 
 function showFavoritesList() {
   const $noFavesCol = document.querySelector('.no-faves-col');
@@ -98,16 +100,27 @@ function showFavoritesList() {
   }
 
   $favesList.className = '';
+  $about.className = 'about hidden';
   $cardsView.className = 'hidden';
   $formContainer.className = 'form-container hidden';
   localStorage.setItem('faves', 'viewed');
 }
 
+function showAbout() {
+  $about.className = 'about';
+  $cardsView.className = 'hidden';
+  $favesList.className = 'hidden';
+  $formContainer.className = 'form-container hidden';
+  localStorage.setItem('about', 'viewed');
+}
+
 function showCardList() {
   $favesList.className = 'hidden';
   $cardsView.className = '';
+  $about.className = 'about hidden';
   $formContainer.className = 'form-container';
   localStorage.setItem('faves', 'hide');
+  localStorage.setItem('about', 'hide');
 }
 
 // stores a certain value to local storage before refresh
@@ -126,6 +139,7 @@ window.addEventListener('beforeunload', () => {
 // then hide no faves text
 document.addEventListener('DOMContentLoaded', function (event) {
   var faves = localStorage.getItem('faves');
+  var about = localStorage.getItem('about');
   const $noFavesCol = document.querySelector('.no-faves-col');
   const listHasItems = localStorage.getItem('listHasItems');
 
@@ -135,6 +149,10 @@ document.addEventListener('DOMContentLoaded', function (event) {
 
   if (faves === 'viewed') {
     showFavoritesList();
+  }
+
+  if (about === 'viewed') {
+    showAbout();
   }
 
   for (var keys in localStorage) {
@@ -248,6 +266,44 @@ function renderFavorite(faveId) {
   xhr.send();
 }
 
+// wait x number of seconds so liveSearch doesn't slow down page
+var $searchInput = document.getElementById('search-input');
+var timer;
+var typeInterval = 500;
+
+$searchInput.addEventListener('keydown', liveSearch);
+$searchInput.addEventListener('keyup', () => {
+  clearTimeout(timer);
+  timer = setTimeout(liveSearch, typeInterval);
+});
+
+function liveSearch() {
+  var $card = document.querySelectorAll('.cc');
+  var $tryAgain = document.querySelector('.no-results');
+  var $query = $searchInput.value;
+  var $noResults = true;
+
+  for (var i = 0; i < $card.length; i++) {
+    if (!$card[i].textContent.toLowerCase().includes($query.toLowerCase().trim())) {
+      $card[i].className = 'col-fifth col-fourth col-third cc hidden';
+    }
+
+    if ($card[i].textContent.toLowerCase().includes($query.toLowerCase().trim())) {
+      $noResults = false; // if at least one card is found
+    }
+
+    if ($query === '') {
+      $card[i].className = 'col-fifth col-fourth col-third cc';
+    }
+
+    if ($noResults) {
+      $tryAgain.textContent = 'No results were found. Try searching again.';
+    } else {
+      $tryAgain.textContent = '';
+    }
+  }
+}
+
 /*
 MODAL DOM TREE
 
@@ -337,7 +393,7 @@ function getCards() {
   xhr.addEventListener('load', function () {
     for (var i = 0; i < xhr.response.data.length; i++) {
       var $colFifth = document.createElement('div');
-      $colFifth.setAttribute('class', 'col-fifth col-fourth col-third');
+      $colFifth.setAttribute('class', 'col-fifth col-fourth col-third cc');
 
       var $clowCard = document.createElement('div');
       $clowCard.setAttribute('class', 'clow-card');
@@ -396,5 +452,10 @@ function getCards() {
     }
   });
 }
+
+window.addEventListener('offline', event => {
+  var $err = document.querySelector('.err');
+  $err.className = 'err';
+});
 
 getCards();

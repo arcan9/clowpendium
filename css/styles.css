@@ -12,6 +12,7 @@ body {
 a {
   text-decoration: none;
   color: white;
+  cursor: pointer;
 }
 
 img {
@@ -26,13 +27,21 @@ input {
   padding: 0.75rem 0.25rem;
 }
 
+a.api-url {
+  color: pink;
+}
+
+a.api-url:hover {
+  color: #9476b7;
+}
+
 i:hover {
   cursor: pointer;
 }
 
 h2.favorites {
   font-family: "Proza Libre", serif;
-  margin: 30px 16px 20px;
+  margin: 1.875rem 1rem 1.25rem;
 }
 
 h2.favorites i:hover {
@@ -101,7 +110,7 @@ ul.nav-links a:hover {
 
 ul.nav-links li {
   display: inline;
-  margin: 0 13px;
+  margin: 0 0.813rem;
   font-size: 0.938rem;
 }
 
@@ -113,7 +122,7 @@ div.clow-card {
   border: 1px solid rgb(199 199 199);
   border-radius: 0.25rem;
   box-shadow: 0 6px 6px -4px rgb(0 0 0 / 30%);
-  padding: 13px 13px 0;
+  padding: 0.813rem 0.813rem 0;
   background-color: white;
 }
 
@@ -122,11 +131,11 @@ div.clow-card img:hover {
 }
 
 div.clow-card-wrapper {
-  margin: 30px auto;
+  margin: 1.875rem auto;
 }
 
 div.f-clow-card-wrapper {
-  margin: 20px auto;
+  margin: 1.25rem auto;
 }
 
 div.clow-card-text {
@@ -137,13 +146,13 @@ div.clow-card-text {
 }
 
 div.clow-card-text i.fa-heart {
-  margin: 0 4px;
+  margin: 0 0.25rem;
 }
 
 /* FAVES LIST */
 
 div.f-clow-card {
-  padding: 13px;
+  padding: 0.813rem;
 }
 
 div.delete-anchor-div {
@@ -151,19 +160,8 @@ div.delete-anchor-div {
   text-decoration: underline;
 }
 
-/* Ellipsis for note preview */
-
-/* p.note-preview {
-  width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
-  display: inline-block;
-  text-overflow: ellipsis;
-  margin: 0;
-} */
-
 p.note {
-  margin: 0 0 10px;
+  margin: 0 0 0.625rem;
   color: rgb(172, 169, 170);
 }
 
@@ -174,4 +172,51 @@ p.no-faves-text {
 div.edit-btn {
   text-align: right;
   font-size: 1.375rem;
+}
+
+div.loader-container {
+  display: flex;
+  justify-content: center;
+}
+
+div.no-results {
+  display: flex;
+  justify-content: center;
+}
+
+div.about,
+div.err {
+  text-align: center;
+}
+
+div.err {
+  color: red;
+}
+
+.lds-dual-ring {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.lds-dual-ring::after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 0.5rem;
+  border-radius: 50%;
+  border: 6px solid #fcf;
+  border-color: #fcf transparent;
+  animation: lds-dual-ring 1.2s linear infinite;
+}
+
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
