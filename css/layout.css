@@ -172,6 +172,14 @@
     max-width: 80%;
     margin: 0 auto;
   }
+
+  .card-modal-wrapper {
+    width: 75%;
+  }
+
+  .modal-row {
+    flex-direction: row;
+  }
 }
 
 @media screen and (min-width: 250px) and (max-width: 490px) {

@@ -100,6 +100,7 @@ function showFavoritesList() {
   }
 
   $favesList.className = '';
+  $about.className = 'about hidden';
   $cardsView.className = 'hidden';
   $formContainer.className = 'form-container hidden';
   localStorage.setItem('faves', 'viewed');
