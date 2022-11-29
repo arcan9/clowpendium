@@ -1,4 +1,4 @@
-# ajax-project
+# Clowpendium
 
 A dynamic HTML, CSS, and JavaScript solo project. For fans of the manga/anime sensation Cardcaptor Sakura who want to view and record info about the cards featured in the Cardcaptor universe.
 
@@ -15,7 +15,7 @@ Cardcaptor Sakura was one of my favorite shows growing up so I wanted to pay tri
 
 ## Live Demo
 
-[https://arcan9.github.io/ajax-project/](https://arcan9.github.io/ajax-project/)
+[https://arcan9.github.io/clowpendium/](https://arcan9.github.io/clowpendium/)
 
 ## Features
 
